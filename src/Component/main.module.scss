@@ -1,0 +1,9 @@
+.patchWrapper{
+    border:1px solid black;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: space-between;
+    align-items: center;
+    grid-gap: 10px;
+    padding: 10px;
+}

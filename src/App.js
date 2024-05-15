@@ -1,13 +1,15 @@
 import logo from "./logo.svg";
 import "./App.css";
 import Main from "./Component/Main";
-import NewMain from "./Component/NewMain";
+import NewJsonViewer from "./Component/NewJson";
+import JsonViewerWithCard from "./Component/JsonViewerWithCard";
 
 function App() {
   return (
     <div className="App">
       {/* <Main /> */}
-      <NewMain />
+      <JsonViewerWithCard />
+      {/* <NewJsonViewer /> */}
     </div>
   );
 }

@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import ReactDiffViewer from "react-diff-viewer";
 import "./NewMain.css"; // Import custom CSS for styling
 import { AfterBaseObject, BaseObject, JSONPatch } from "./Constant";
-
-const NewMain = () => {
+import CardComponent from "./CardComponent/CardComponent";
+import styles from "./main.module.scss";
+import { Button } from "antd";
+const JsonViewerWithCard = () => {
   // const [acceptedText, setAcceptedText] = useState(newText);
 
   // const handleAcceptChanges = () => {
@@ -71,21 +73,26 @@ const NewMain = () => {
   const newText = JSON.stringify(object, null, 2);
   return (
     <div className="diff-container">
-      <h1>Text Difference</h1>
       <h2>Remaining Patches</h2>
-      <textarea name="input" onChange={handleChange} />
-      <ul>
-        {remainingPatches.map((patch, index) => (
-          <li key={index}>
-            <p>Operation: {patch.op}</p>
-            <p>Path: {patch.path}</p>
-            <p>Value: {JSON.stringify(patch.value)}</p>
-            <button onClick={() => handleAccept(patch)}>Accept</button>
-            <button onClick={() => handleReject(patch)}>Reject</button>
-          </li>
-        ))}
-      </ul>
-      <div className="diff-viewer-container">
+      <div className={styles.patchWrapper}>
+        {remainingPatches.map((element, index) => {
+          const { op, path, value } = element;
+          return (
+            <CardComponent
+              op={op}
+              path={path}
+              value={value}
+              action={[
+                <Button type="primary" onClick={() => handleAccept(element)}>
+                  Add
+                </Button>,
+                <Button onClick={() => handleReject(element)}> Delete</Button>,
+              ]}
+            />
+          );
+        })}
+      </div>
+      <div>
         <ReactDiffViewer
           oldValue={oldText}
           newValue={newText}
@@ -93,6 +100,11 @@ const NewMain = () => {
           onLineNumberClick={(lineNumber) =>
             console.log(`Clicked line ${lineNumber}`)
           }
+          disableWordDiff={true}
+          showDiffOnly={false}
+          expand={false}
+          leftTitle="Base Object"
+          rightTitle="Updated Object"
         />
         {/* Arrows for accepting and rejecting changes */}
         {/* <div className="action-arrows">
@@ -108,4 +120,4 @@ const NewMain = () => {
   );
 };
 
-export default NewMain;
+export default JsonViewerWithCard;
