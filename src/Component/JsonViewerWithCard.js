@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import ReactDiffViewer from "react-diff-viewer";
 import "./NewMain.css";
 import { AfterBaseObject, BaseObject, JSONPatch } from "./Constant";
@@ -17,6 +17,8 @@ const JsonViewerWithCard = () => {
 
   const [object, setObject] = useState(BaseObject);
   const [remainingPatches, setRemainingPatches] = useState(JSONPatch);
+  const targetRef = useRef(null);
+
   const handleAccept = (patch) => {
     const { op, path, value } = patch;
     if (op === "replace") {
@@ -48,6 +50,10 @@ const JsonViewerWithCard = () => {
     setRemainingPatches((prevPatches) =>
       prevPatches.filter((patchItem) => patchItem !== patch)
     );
+    if (targetRef.current) {
+      targetRef.current.scrollIntoView({ behavior: "smooth" });
+      targetRef.current.focus();
+    }
   };
 
   const handleReject = (patch) => {
@@ -93,7 +99,7 @@ const JsonViewerWithCard = () => {
           );
         })}
       </div>
-      <div className={styles.jsonViewerWraper}>
+      <div className={styles.jsonViewerWraper} ref={targetRef}>
         <ReactDiffViewer
           oldValue={oldText}
           newValue={newText}
