@@ -9,9 +9,9 @@ function App() {
   return (
     <div className="App">
       {/* <Main /> */}
-      <JsonViewerWithCard />
+      {/* <JsonViewerWithCard /> */}
       {/* <NewJsonViewer /> */}
-      {/* <DynamicJsonViewer /> */}
+      <DynamicJsonViewer />
     </div>
   );
 }
