@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import ReactDiffViewer from "react-diff-viewer";
 import { AfterBaseObject, BaseObject, JSONPatch } from "./Constant";
-import CardComponent from "./CardComponent/CardComponent";
 import { Button } from "antd";
 import styles from "./main.module.scss";
 const DynamicJsonViewer = () => {

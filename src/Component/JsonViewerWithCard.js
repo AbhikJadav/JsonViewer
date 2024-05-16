@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import ReactDiffViewer from "react-diff-viewer";
 import "./NewMain.css";
 import { AfterBaseObject, BaseObject, JSONPatch } from "./Constant";
-import CardComponent from "./CardComponent/CardComponent";
 import styles from "./main.module.scss";
 import { Button } from "antd";
+import CardComponent from "../Component/CardComponent/CardComponent";
 const JsonViewerWithCard = () => {
   const newStyles = {
     line: {
