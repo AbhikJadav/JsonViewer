@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ReactDiffViewer from "react-diff-viewer";
-import "./NewMain.css"; // Import custom CSS for styling
+import "./NewMain.css";
 import { AfterBaseObject, BaseObject, JSONPatch } from "./Constant";
 import CardComponent from "./CardComponent/CardComponent";
 import styles from "./main.module.scss";
@@ -15,18 +15,6 @@ const JsonViewerWithCard = () => {
     },
   };
 
-  // const [acceptedText, setAcceptedText] = useState(newText);
-
-  // const handleAcceptChanges = () => {
-  //   setAcceptedText(newText);
-  //   // You can perform additional actions here, like saving the accepted text.
-  // };
-
-  // const handleRejectChanges = () => {
-  //   // Perform actions to revert to the original text or previous version.
-  //   // For example, you might fetch the original text from a server or reset state.
-  //   setAcceptedText(oldText);
-  // };
   const [object, setObject] = useState(BaseObject);
   const [remainingPatches, setRemainingPatches] = useState(JSONPatch);
   const handleAccept = (patch) => {
@@ -67,19 +55,10 @@ const JsonViewerWithCard = () => {
       prevPatches.filter((patchItem) => patchItem !== patch)
     );
   };
-  // const differ = new Differ({
-  //   detectCircular: true, // default `true`
-  //   maxDepth: Infinity, // default `Infinity`
-  //   showModifications: true, // default `true`
-  //   arrayDiffMethod: "lcs", // default `"normal"`, but `"lcs"` may be more useful
-  // });
-  // const diff = differ.diff(AfterBaseObject, object);
-  const [value, setValue] = useState([]);
-  const handleChange = (event) => {
-    setValue([...value, event.target.value]);
-  };
+
   const oldText = JSON.stringify(AfterBaseObject, null, 2);
   const newText = JSON.stringify(object, null, 2);
+
   return (
     <div className={styles.jsonContainer}>
       <h2>Remaining Patches</h2>
@@ -92,10 +71,23 @@ const JsonViewerWithCard = () => {
               path={path}
               value={value}
               action={[
-                <Button type="primary" onClick={() => handleAccept(element)}>
-                  Add
-                </Button>,
-                <Button onClick={() => handleReject(element)}> Delete</Button>,
+                <div className={styles.actionBtn}>
+                  <Button
+                    type="primary"
+                    onClick={() => handleAccept(element)}
+                    className={styles.btnContainer}
+                  >
+                    Accept
+                  </Button>
+                  ,
+                  <Button
+                    onClick={() => handleReject(element)}
+                    className={styles.btnContainer}
+                  >
+                    Reject
+                  </Button>
+                  ,
+                </div>,
               ]}
             />
           );
@@ -106,7 +98,7 @@ const JsonViewerWithCard = () => {
           oldValue={oldText}
           newValue={newText}
           splitView={true}
-          onLineNumberClick={(lineNumber) =>
+          onLineNumberClick={(lineNumber, type) =>
             console.log(`Clicked line ${lineNumber}`)
           }
           disableWordDiff={true}
@@ -114,17 +106,11 @@ const JsonViewerWithCard = () => {
           expand={false}
           leftTitle="Base Object"
           rightTitle="Updated Object"
-          styles={newStyles}
+          // styles={newStyles}
+          onLineContentClick={(line, type) =>
+            console.log(`Line content ${line} clicked on ${type} side`)
+          }
         />
-        {/* Arrows for accepting and rejecting changes */}
-        {/* <div className="action-arrows">
-          <div className="arrow" onClick={handleAcceptChanges}>
-            &#8594;
-          </div>
-          <div className="arrow" onClick={handleRejectChanges}>
-            &#8592;
-          </div>
-        </div> */}
       </div>
     </div>
   );

@@ -11,7 +11,6 @@ const NewJson = () => {
   const oldText = JSON.stringify(AfterBaseObject, null, 2);
   const newText = JSON.stringify(object, null, 2);
   const [acceptedText, setAcceptedText] = useState(newText);
-  console.log("acceptedText", acceptedText);
   const [remainingPatches, setRemainingPatches] = useState(JSONPatch);
   const handleAccept = (patch) => {
     const { op, path, value } = patch;
