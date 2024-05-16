@@ -6,6 +6,15 @@ import CardComponent from "./CardComponent/CardComponent";
 import styles from "./main.module.scss";
 import { Button } from "antd";
 const JsonViewerWithCard = () => {
+  const newStyles = {
+    line: {
+      padding: "10px",
+    },
+    contentText: {
+      color: "red",
+    },
+  };
+
   // const [acceptedText, setAcceptedText] = useState(newText);
 
   // const handleAcceptChanges = () => {
@@ -105,6 +114,7 @@ const JsonViewerWithCard = () => {
           expand={false}
           leftTitle="Base Object"
           rightTitle="Updated Object"
+          styles={newStyles}
         />
         {/* Arrows for accepting and rejecting changes */}
         {/* <div className="action-arrows">
