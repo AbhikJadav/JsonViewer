@@ -3,6 +3,7 @@ import "./App.css";
 import Main from "./Component/Main";
 import JsonViewerWithCard from "./Component/JsonViewerWithCard";
 import DynamicJsonViewer from "./Component/DynamicJsonViewer";
+import SingleDynamicJson from "./Component/SingleDynamicJson";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       {/* <Main /> */}
       <JsonViewerWithCard />
       {/* <DynamicJsonViewer /> */}
+      {/* <SingleDynamicJson /> */}
     </div>
   );
 }

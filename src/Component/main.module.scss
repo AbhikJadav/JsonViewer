@@ -1,6 +1,11 @@
 .jsonContainer {
   background: #f0f2f5;
   padding: 30px;
+  max-height: max-content;
+}
+.singleJsonContainer {
+  background: #f0f2f5;
+  padding: 30px;
   height: 100vh;
 }
 .patchWrapper {
@@ -11,9 +16,10 @@
   grid-gap: 20px;
   padding: 20px 0px;
 }
-.jsonViewerWraper {
+.jsonViewerWrapper {
   border: 1px solid rgb(198, 193, 193);
   padding-bottom: 40px;
+  background: #fff;
 }
 .actionBtn {
   display: flex;
