@@ -86,7 +86,7 @@ const DynamicJsonViewer = () => {
       ) : (
         <p>No changes to apply</p>
       )}
-      <div className={styles.jsonViewerWraper}>
+      <div className={styles.jsonViewerWrapper}>
         <ReactDiffViewer
           oldValue={oldText}
           newValue={newText}

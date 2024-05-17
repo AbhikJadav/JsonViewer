@@ -21,32 +21,22 @@ const JsonViewerWithCard = () => {
 
   const handleAccept = (patch) => {
     const { op, path, value } = patch;
-    if (op === "replace") {
-      setObject((prevObject) => {
-        const newObj = { ...prevObject };
-        const pathParts = path.split("/").filter((part) => part !== "");
-        let current = newObj;
-        for (let i = 0; i < pathParts.length - 1; i++) {
-          current = current[pathParts[i]];
-        }
-        current[pathParts[pathParts.length - 1]] = value;
-        return newObj;
-      });
-    } else if (op === "add") {
-      setObject((prevObject) => {
-        const newObj = { ...prevObject };
-        const pathParts = path.split("/").filter((part) => part !== "");
-        let current = newObj;
-        for (let i = 0; i < pathParts.length - 1; i++) {
+    setObject((prevObject) => {
+      const newObj = { ...prevObject };
+      const pathParts = path.split("/").filter((part) => part !== "");
+      let current = newObj;
+      for (let i = 0; i < pathParts.length - 1; i++) {
+        if (op === "add") {
           if (!current[pathParts[i]]) {
             current[pathParts[i]] = {};
           }
-          current = current[pathParts[i]];
         }
-        current[pathParts[pathParts.length - 1]] = value;
-        return newObj;
-      });
-    }
+        current = current[pathParts[i]];
+      }
+      current[pathParts[pathParts.length - 1]] = value;
+      return newObj;
+    });
+
     setRemainingPatches((prevPatches) =>
       prevPatches.filter((patchItem) => patchItem !== patch)
     );
@@ -85,21 +75,19 @@ const JsonViewerWithCard = () => {
                   >
                     Accept
                   </Button>
-                  ,
                   <Button
                     onClick={() => handleReject(element)}
                     className={styles.btnContainer}
                   >
                     Reject
                   </Button>
-                  ,
                 </div>,
               ]}
             />
           );
         })}
       </div>
-      <div className={styles.jsonViewerWraper} ref={targetRef}>
+      <div className={styles.jsonViewerWrapper} ref={targetRef}>
         <ReactDiffViewer
           oldValue={oldText}
           newValue={newText}
